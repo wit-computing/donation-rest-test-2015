@@ -36,9 +36,9 @@ public class DonationServiceAPI
     return users.body();
   }
 
-  public List<Donation> getDonations() throws Exception
+  public List<Donation> getDonations(User user) throws Exception
   {
-    Call<List<Donation>> call = (Call<List<Donation>>) service.getDonations();
+    Call<List<Donation>> call = (Call<List<Donation>>) service.getDonations(user.id);
     retrofit.Response<List<Donation>> donations = null;
     donations = call.execute();
     return donations.body();
@@ -59,11 +59,19 @@ public class DonationServiceAPI
     return  val.body();
   }
 
-  public Donation createDonation(Donation newDonation) throws Exception
+  public Donation createDonation(User user, Donation newDonation) throws Exception
   {
-    Call<Donation> call = (Call<Donation>) service.createDonation(newDonation);
+    Call<Donation> call = (Call<Donation>) service.createDonation(user.id, newDonation);
     retrofit.Response<Donation> returnedDonation = null;
     returnedDonation = call.execute();
     return returnedDonation.body();
   }
+  
+  public String deleteDonation(User user, Donation donation) throws Exception
+  {
+	Call<String> call =  (Call<String>) service.deleteDonation(user.id, donation.id);
+    retrofit.Response<String> val = call.execute();
+    return  val.body();
+  }  
+  
 }
