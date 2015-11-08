@@ -23,9 +23,12 @@ public interface DonationService
   @DELETE("/api/users/{id}")
   Call<String> deleteUser(@Path("id") Long id);
 
-  @GET("/api/donations")
-  Call<List<Donation>> getDonations();
+  @GET("/api/users/{id}/donations")
+  Call<List<Donation>> getDonations(@Path("id") Long id);
 
-  @POST("/api/donations")
-  Call<Donation> createDonation(@Body Donation donation);
+  @POST("/api/users/{id}/donations")
+  Call<Donation> createDonation(@Path("id") Long id, @Body Donation donation);
+  
+  @DELETE("/api/users/{id}/donations/{donationId}")
+  Call<String> deleteDonation(@Path("id") Long id, @Path("donationId") Long donationId);
 }
